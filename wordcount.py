@@ -26,14 +26,26 @@ should return a dictionary with words as keys, and their counts as values.
 # Your name, plus anyone who helped you with this assignment
 # Give credit where credit is due.
 __author__ = "Kamela Williamson"
+# worked on it with Mai and Cesar helped us a lot!
 
 import sys
 
 
 def create_word_dict(filename):
     """Returns a word/count dict for the given file."""
+    # filename = filename.strip()
     # Your code here
-    return
+    create_word = {}
+    with open(filename, 'r') as file:
+        words = file.read().split()
+        for word in words:
+            word = word.lower()
+            if word in create_word.keys():
+                create_word[word] += 1
+            else:
+                create_word[word] = 1
+
+    return(create_word)
 
 
 def print_words(filename):
@@ -41,12 +53,19 @@ def print_words(filename):
     by word for the given file.
     """
     # Your code here
-    return
+    word_count = sorted(create_word_dict(filename).items())
+    for tup in word_count:
+        print(tup)
 
 
 def print_top(filename):
     """Prints the top count listing for the given file."""
     # Your code here
+    word_count = list(create_word_dict(filename).items())
+    words = sorted(word_count, key=lambda x: x[-1], reverse=True)
+    for tup in words[:20]:
+        print(tup)
+
     return
 
 
